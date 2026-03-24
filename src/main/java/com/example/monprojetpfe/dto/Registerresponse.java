@@ -11,9 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class Registerresponse {
-    private String email ;
+    private String message ;
     private String name ;
-    private String message;
+    private String email;
     private Long id;
 
 

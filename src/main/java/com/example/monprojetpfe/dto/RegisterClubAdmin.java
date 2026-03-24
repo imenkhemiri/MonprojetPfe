@@ -1,27 +1,32 @@
+// RegsiterClubAdmin.java
 package com.example.monprojetpfe.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-public class RegisterRequest {
+public class RegisterClubAdmin {
+
+
+    private String nom;
+    private String ville;
+    private Integer anneeFondation;
+
+
     private String email;
     private String password;
-    private String username;
+    private String name;
+    private String lastName;
     private String phone;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateNaissance;
-
+    private String pays;
     private String genre;
     private String nationalite;
     private String adresse;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateNaissance;
 }

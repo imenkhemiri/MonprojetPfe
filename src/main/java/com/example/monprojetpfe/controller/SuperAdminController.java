@@ -17,7 +17,6 @@ public class SuperAdminController {
     @Autowired
     private SuperAdminService superAdminService;
 
-
     @GetMapping("/pending")
     public ResponseEntity<?> getPendingFederations() {
         try {
@@ -28,12 +27,11 @@ public class SuperAdminController {
         }
     }
 
-
     @PutMapping("/approve/{userId}")
     public ResponseEntity<String> approve(@PathVariable Long userId) {
         try {
             superAdminService.approveFederation(userId);
-            return ResponseEntity.ok("Fédération approuvée ✅");
+            return ResponseEntity.ok("Fédération approuvée");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -43,9 +41,39 @@ public class SuperAdminController {
     public ResponseEntity<String> reject(@PathVariable Long userId) {
         try {
             superAdminService.rejectFederation(userId);
-            return ResponseEntity.ok("Fédération rejetée ");
+            return ResponseEntity.ok("Fédération rejetée");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/block/{userId}")
+    public ResponseEntity<String> blockUser(@PathVariable Long userId) {
+        try {
+            superAdminService.blockUser(userId);
+            return ResponseEntity.ok("Compte bloqué avec succès");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/unblock/{userId}")
+    public ResponseEntity<String> unblockUser(@PathVariable Long userId) {
+        try {
+            superAdminService.unblockUser(userId);
+            return ResponseEntity.ok("Compte débloqué avec succès");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    // ← retourne tous les statuts
+    @GetMapping("/approved-users")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            return ResponseEntity.ok(superAdminService.getAllUsers());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 }

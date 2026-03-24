@@ -1,10 +1,7 @@
 package com.example.monprojetpfe.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "users")
 public class User implements  UserDetails {
 
@@ -36,9 +34,11 @@ public class User implements  UserDetails {
 
     @Column(length = 15)
     private String phone;
-
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String lastName;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority( "ROLE_"+role.name()));
@@ -79,6 +79,8 @@ public class User implements  UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
+    @ManyToOne
+    @JoinColumn(name = "club_id")
+    private Club club;
 }
 

@@ -1,6 +1,7 @@
 package com.example.monprojetpfe.dto;
 
 
+import com.example.monprojetpfe.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,6 @@ public class AuthResponse {
     private String token;
     private String email;
     private Long user_id;
-
+ private Role role ;
 
 }

@@ -11,6 +11,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Club {
 
     @Id
@@ -25,7 +26,9 @@ public class Club {
     private String Urllogo ;
 
 
-
+@OneToOne (cascade = CascadeType.ALL)
+@JoinColumn(name="adminClub")
+private User adminClub;
     @ManyToOne
     @JoinColumn(name = "federation_id")
     @JsonIgnore
